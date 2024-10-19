@@ -6,10 +6,10 @@ namespace BloggerPro.Repositories
 {
     public class UserRepository
     {
-        private readonly string connectionString = "";
+        private static readonly string connectionString = "";
 
         //register
-        public void Register(User user)
+        public static void Register(User user)
         {
             using(var connection = new MySqlConnection(connectionString))
             {
@@ -20,7 +20,7 @@ namespace BloggerPro.Repositories
         }
 
         //login
-        public User Login(string username, string password)
+        public static User Login(string username, string password)
         {
             using (var connection = new MySqlConnection(connectionString))
             {
@@ -31,7 +31,7 @@ namespace BloggerPro.Repositories
         }
 
         //get a user
-        public User GetUser(int userId)
+        public static User GetUser(int userId)
         {
             using (var connection = new MySqlConnection(connectionString))
             {
