@@ -7,8 +7,7 @@ namespace BloggerPro.Repositories
 {
     public class CommunityRepository
     {
-        private static readonly string connectionString = "Server = localhost; User ID = root; Database = BloggerDB; Password=loveforall1990#;";
-;
+        private static readonly string connectionString = "Server = localhost; User ID = root; Database = BloggerDB; Password=loveforall1990#";
 
         public static IEnumerable<Community> GetAll()
         {
