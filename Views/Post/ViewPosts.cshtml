@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Post>
+
+@{
+    ViewBag.Title = "Community Posts";
+}
+
+<h2>Posts in the Community</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">No posts available in this community yet.</div>
+}
+else
+{
+    <div class="list-group">
+        @foreach (var post in Model)
+        {
+            <a href="#" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">@post.Title</h5>
+                    <small>@post.CreatedAt.ToString("g")</small>
+                </div>
+                <p class="mb-1">@post.Content</p>
+                <small>Posted by User @post.UserId</small>
+            </a>
+        }
+    </div>
+}

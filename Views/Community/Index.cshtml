@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Community>
+
+@{
+    ViewBag.Title = "Your Communities";
+}
+
+<h2>Your Communities</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">You haven't joined any communities yet.</div>
+}
+else
+{
+    <div class="row">
+        @foreach (var community in Model)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">@community.Name</h5>
+                        <a href="@Url.Action("Details", new { id = community.Id })" class="btn btn-primary">View</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

@@ -1,0 +1,12 @@
+﻿@model Community
+
+@{
+    ViewBag.Title = "Community Details";
+}
+
+<h2>@Model.Name</h2>
+
+<div class="my-3">
+    <a href="@Url.Action("Create", "Post", new { communityId = Model.Id })" class="btn btn-primary">Create New Post</a>
+    <a href="@Url.Action("ViewPosts", "Post", new { communityId = Model.Id })" class="btn btn-secondary">View Posts</a>
+</div>

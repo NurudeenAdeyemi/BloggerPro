@@ -6,38 +6,34 @@ namespace BloggerPro.Repositories
 {
     public class UserRepository
     {
-        private static readonly string connectionString = "";
+        private static readonly string connectionString = "Server = localhost; User ID = root; Database = BloggerDB; Password=loveforall1990#;";
 
-        //register
-        public static void Register(User user)
+        public static User GetById(int id)
         {
-            using(var connection = new MySqlConnection(connectionString))
+            using (var connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                connection.Execute($"insert into Users (Username, Email, Password) values ({user.Username}, {user.Email}, {user.Password})");
+                return connection.QuerySingleOrDefault<User>("SELECT * FROM Users WHERE Id = @Id", new { Id = id });
             }
-
         }
 
-        //login
         public static User Login(string username, string password)
         {
             using (var connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                var user = connection.QuerySingleOrDefault<User>($"select from Users where Username = {username}and Password = {password}");
-                return user;
+                return connection.QuerySingleOrDefault<User>(
+                    "SELECT * FROM Users WHERE Username = @Username AND Password = @Password",
+                    new { Username = username, Password = password });
             }
         }
 
-        //get a user
-        public static User GetUser(int userId)
+        public static void Register(User user)
         {
             using (var connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                var user = connection.QuerySingleOrDefault<User>($"select from Users where Id = {userId}");
-                return user;
+                connection.Execute("INSERT INTO Users (Username, Email, Password) VALUES (@Username, @Email, @Password)", user);
             }
         }
     }
