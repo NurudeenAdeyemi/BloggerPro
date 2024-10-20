@@ -6,6 +6,11 @@
 
 <h2>All Available Communities</h2>
 
+<!-- Create Community Button -->
+<div class="mb-3">
+    <a href="@Url.Action("Create", "Community")" class="btn btn-primary">Create New Community</a>
+</div>
+
 <div class="row">
     @foreach (var community in Model)
     {
@@ -19,4 +24,4 @@
             </div>
         </div>
     }
-}
+    }

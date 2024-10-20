@@ -1,6 +1,7 @@
 ﻿using BloggerPro.Models;
 using BloggerPro.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BloggerPro.Controllers
 {
@@ -17,7 +18,7 @@ namespace BloggerPro.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userId = HttpContext?.User?.Identity?.Name;
+                var userId = HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier).Value;
                 post.UserId = int.Parse(userId);
                 post.CreatedAt = DateTime.Now;
                 PostRepository.AddPost(post);

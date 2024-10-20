@@ -41,7 +41,7 @@ namespace BloggerPro.Repositories
             using (var connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                connection.Execute("INSERT INTO UserCommunities (UserId, CommunityId) VALUES (@UserId, @CommunityId)",
+                connection.Execute("INSERT INTO UserCommunity (UserId, CommunityId) VALUES (@UserId, @CommunityId)",
                     new { UserId = userId, CommunityId = communityId });
             }
         }
@@ -86,6 +86,22 @@ namespace BloggerPro.Repositories
             }
 
             return communities;
+        }
+
+        // Adds a new community to the database using Dapper
+        public void AddCommunity(Community community)
+        {
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                string query = @"INSERT INTO Communities (Name, Description, CreatedAt) 
+                                 VALUES (@Name, @Description, @CreatedAt)";
+
+                connection.Execute(query, new
+                {
+                    community.Name,
+                    CreatedAt = DateTime.Now
+                });
+            }
         }
     }
 }
